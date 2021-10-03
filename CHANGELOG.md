@@ -1,3 +1,14 @@
+# 2.2.3
+- Primary purpose of this released was to revert the 2.2.2 release.
+
+- manaully merged in PR #52 - Fix overflow issue when using high precision currencies
+- Added trailing commas to fix lint errors.
+- moved unit test libraries into corrext directories.
+- upgraded test package version
+
+# 2.2.2
+-- WARNING - do not use this release. It was released in error and includes the v3 beta api changes.
+
 # 2.2.1
 Improved documentation around the Currencies class.
 
