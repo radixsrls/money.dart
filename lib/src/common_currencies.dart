@@ -28,8 +28,13 @@ class CommonCurrencies {
   final Currency aud = Currency.create('AUD', 2);
 
   /// Brazilian Real
-  final Currency brl = Currency.create('BRL', 2,
-      symbol: r'R$', invertSeparators: true, pattern: 'S0,00');
+  final Currency brl = Currency.create(
+    'BRL',
+    2,
+    symbol: r'R$',
+    invertSeparators: true,
+    pattern: 'S0,00',
+  );
 
   /// Bit coin dollar
   final Currency btc = Currency.create('BTC', 8, symbol: '₿', pattern: 'S0');
@@ -44,15 +49,25 @@ class CommonCurrencies {
   final Currency cny = Currency.create('CNY', 2, symbol: '¥');
 
   /// euro
-  final Currency euro = Currency.create('EUR', 2,
-      symbol: '€', invertSeparators: true, pattern: '0,00S');
+  final Currency euro = Currency.create(
+    'EUR',
+    2,
+    symbol: '€',
+    invertSeparators: true,
+    pattern: '0,00S',
+  );
 
   /// British Pound Sterling
   final Currency gbp = Currency.create('GBP', 2, symbol: '£');
 
   /// Indian Rupee
-  final Currency inr = Currency.create('INR', 2,
-      symbol: '₹', invertSeparators: true, pattern: 'S000.00,00');
+  final Currency inr = Currency.create(
+    'INR',
+    2,
+    symbol: '₹',
+    invertSeparators: true,
+    pattern: 'S000.00,00',
+  );
 
   /// Japanese Yen
   final Currency jpy = Currency.create('JPY', 0, symbol: '¥', pattern: 'S0');
@@ -85,12 +100,22 @@ class CommonCurrencies {
   final Currency zar = Currency.create('ZAR', 2, symbol: 'R');
 
   /// Polish zloty
-  final Currency pln = Currency.create('PLN', 2,
-      symbol: 'zł', invertSeparators: true, pattern: '0,00S');
+  final Currency pln = Currency.create(
+    'PLN',
+    2,
+    symbol: 'zł',
+    invertSeparators: true,
+    pattern: '0,00S',
+  );
 
   /// Czech koruna
-  final Currency czk = Currency.create('CZK', 2,
-      symbol: 'Kč', invertSeparators: true, pattern: '0,00S');
+  final Currency czk = Currency.create(
+    'CZK',
+    2,
+    symbol: 'Kč',
+    invertSeparators: true,
+    pattern: '0,00S',
+  );
 
   /// Registers all of the common currency.
   void registerAll() {

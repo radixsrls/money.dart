@@ -47,26 +47,36 @@ class MinorUnits implements Comparable<MinorUnits> {
   ///  Allocation
   List<MinorUnits> allocationAccordingTo(List<int> ratios) {
     if (ratios.isEmpty) {
-      throw ArgumentError.value(ratios, 'ratios',
-          'List of ratios must not be empty, cannot allocate to nothing.');
+      throw ArgumentError.value(
+        ratios,
+        'ratios',
+        'List of ratios must not be empty, cannot allocate to nothing.',
+      );
     }
 
-    return _doAllocationAccordingTo(ratios.map((ratio) {
-      if (ratio < 0) {
-        throw ArgumentError.value(
-            ratios, 'ratios', 'Ratio must not be negative.');
-      }
+    return _doAllocationAccordingTo(
+      ratios.map((ratio) {
+        if (ratio < 0) {
+          throw ArgumentError.value(
+            ratios,
+            'ratios',
+            'Ratio must not be negative.',
+          );
+        }
 
-      return BigInt.from(ratio);
-    }).toList());
+        return BigInt.from(ratio);
+      }).toList(),
+    );
   }
 
   List<MinorUnits> _doAllocationAccordingTo(List<BigInt> ratios) {
     final totalVolume = ratios.reduce((a, b) => a + b);
 
     if (totalVolume == BigInt.zero) {
-      throw ArgumentError('Sum of ratios must be greater than zero, '
-          'cannot allocate to nothing.');
+      throw ArgumentError(
+        'Sum of ratios must be greater than zero, '
+        'cannot allocate to nothing.',
+      );
     }
 
     final absoluteValue = _value.abs();
@@ -130,8 +140,9 @@ class MinorUnits implements Comparable<MinorUnits> {
     }
 
     throw UnsupportedError(
-        'Unsupported type of multiplier: "${operand.runtimeType}", '
-        '(int or double are expected)');
+      'Unsupported type of multiplier: "${operand.runtimeType}", '
+      '(int or double are expected)',
+    );
   }
 
   /// Division operator.

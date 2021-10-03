@@ -90,11 +90,13 @@ class Currency {
   /// thousands separator is ','. When this value is true (defaults to false)
   /// then the separators are swapped. This is needed for most non English
   /// speaking [Currency]s.
-  Currency.create(this.code, this.precision,
-      {this.symbol = r'$',
-      this.pattern = defaultPattern,
-      this.invertSeparators = false})
-      : precisionFactor = Currency._calcPrecisionFactor(precision),
+  Currency.create(
+    this.code,
+    this.precision, {
+    this.symbol = r'$',
+    this.pattern = defaultPattern,
+    this.invertSeparators = false,
+  })  : precisionFactor = Currency._calcPrecisionFactor(precision),
         decimalSeparator = invertSeparators ? ',' : '.',
         thousandSeparator = invertSeparators ? '.' : ',' {
     if (code.isEmpty) {
@@ -109,10 +111,13 @@ class Currency {
     String? pattern,
     bool? invertSeparators,
   }) {
-    return Currency.create(code ?? this.code, precision ?? this.precision,
-        symbol: symbol ?? this.symbol,
-        pattern: pattern ?? this.pattern,
-        invertSeparators: invertSeparators ?? this.invertSeparators);
+    return Currency.create(
+      code ?? this.code,
+      precision ?? this.precision,
+      symbol: symbol ?? this.symbol,
+      pattern: pattern ?? this.pattern,
+      invertSeparators: invertSeparators ?? this.invertSeparators,
+    );
   }
 
   ///
@@ -157,7 +162,10 @@ class Currency {
   static BigInt _calcPrecisionFactor(int precision) {
     if (precision.isNegative) {
       throw ArgumentError.value(
-          precision, 'precision', 'Must be a non-negative value.');
+        precision,
+        'precision',
+        'Must be a non-negative value.',
+      );
     }
     return BigInt.from(pow(10, precision));
   }

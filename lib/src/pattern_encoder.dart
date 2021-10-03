@@ -29,8 +29,9 @@ class PatternEncoder implements MoneyEncoder<String> {
 
     if (decimalSeperatorCount > 1) {
       throw IllegalPatternException(
-          'A format Pattern may contain, at most, a single decimal '
-          "separator '${data.currency.decimalSeparator}'");
+        'A format Pattern may contain, at most, a single decimal '
+        "separator '${data.currency.decimalSeparator}'",
+      );
     }
 
     var decimalSeparatorIndex = pattern.indexOf(data.currency.decimalSeparator);
@@ -98,7 +99,8 @@ class PatternEncoder implements MoneyEncoder<String> {
         case '.':
         default:
           throw IllegalPatternException(
-              "The pattern contains an unknown character: '$char'");
+            "The pattern contains an unknown character: '$char'",
+          );
       }
     }
 
@@ -107,7 +109,10 @@ class PatternEncoder implements MoneyEncoder<String> {
 
   ///
   String getFormattedMajorUnits(
-      MoneyData data, final String moneyPattern, BigInt majorUnits) {
+    MoneyData data,
+    final String moneyPattern,
+    BigInt majorUnits,
+  ) {
     String normalisedMoneyPattern;
     if (data.currency.invertSeparators) {
       // the NumberFormat doesn't like the inverted characters
@@ -197,7 +202,8 @@ class PatternEncoder implements MoneyEncoder<String> {
           break;
         default:
           throw IllegalPatternException(
-              "The pattern contains an unknown character: '$char'");
+            "The pattern contains an unknown character: '$char'",
+          );
       }
     }
     return moneyPattern;
@@ -313,7 +319,8 @@ class PatternEncoder implements MoneyEncoder<String> {
         case '.':
         default:
           throw IllegalPatternException(
-              "The minor part of the pattern contains an unexpected character: '$char'");
+            "The minor part of the pattern contains an unexpected character: '$char'",
+          );
       }
     }
 
@@ -359,11 +366,16 @@ class PatternEncoder implements MoneyEncoder<String> {
   }
 
   ///
-  void isMoneyAllowed(
-      {required bool inMoney, required bool foundMoney, required int pos}) {
+  void isMoneyAllowed({
+    required bool inMoney,
+    required bool foundMoney,
+    required int pos,
+  }) {
     if (!inMoney && foundMoney) {
-      throw IllegalPatternException('Found a 0 at location $pos. '
-          'All money characters (0#,.)must be contiguous');
+      throw IllegalPatternException(
+        'Found a 0 at location $pos. '
+        'All money characters (0#,.)must be contiguous',
+      );
     }
   }
 
@@ -375,7 +387,8 @@ class PatternEncoder implements MoneyEncoder<String> {
 
     if ('C'.allMatches(compressedMajorPattern).length > 1) {
       throw IllegalPatternException(
-          "The pattern may only contain a single contigous group of 'C's");
+        "The pattern may only contain a single contigous group of 'C's",
+      );
     }
     return compressedMajorPattern;
   }
@@ -385,7 +398,8 @@ class PatternEncoder implements MoneyEncoder<String> {
     // check for at most single S
     if ('S'.allMatches(majorPattern).length > 1) {
       throw IllegalPatternException(
-          "The pattern may only contain a single 'S's");
+        "The pattern may only contain a single 'S's",
+      );
     }
   }
 
@@ -396,12 +410,16 @@ class PatternEncoder implements MoneyEncoder<String> {
 
   /// Check that Zeros are only at the end of the pattern unless we have thousand separators as there
   /// can then be a zero at the end of each segment.
-  void checkZeros(final String moneyPattern, final String thousandSeparator,
-      {required bool minor}) {
+  void checkZeros(
+    final String moneyPattern,
+    final String thousandSeparator, {
+    required bool minor,
+  }) {
     if (!moneyPattern.contains('0')) return;
 
     final illegalPattern = IllegalPatternException(
-        '''The '0' pattern characters must only be at the end of the pattern for ${minor ? 'Minor' : 'Major'} Units''');
+      '''The '0' pattern characters must only be at the end of the pattern for ${minor ? 'Minor' : 'Major'} Units''',
+    );
 
     // compress zeros so we have only one which should be at the end,
     // unless we have thousand separators then we can have several 0s e.g. 0,0,0

@@ -50,10 +50,14 @@ void main() {
       final currency = Currency.create('BIG', 63);
       Currencies.register(currency);
 
-      expect(Money.from(10.0, currency).minorUnits / currency.precisionFactor,
-          equals(10.0));
-      expect(Money.from(-10.0, currency).minorUnits / currency.precisionFactor,
-          equals(-10.0));
+      expect(
+        Money.from(10.0, currency).minorUnits / currency.precisionFactor,
+        equals(10.0),
+      );
+      expect(
+        Money.from(-10.0, currency).minorUnits / currency.precisionFactor,
+        equals(-10.0),
+      );
     });
 
     test('bigint hash value', () {
@@ -277,13 +281,16 @@ void main() {
 
       test('provides list with allocated money values', () {
         void testAllocation(
-            int minorUnits, List<int> ratios, List<int> result) {
+          int minorUnits,
+          List<int> ratios,
+          List<int> result,
+        ) {
           final money = Money.fromInt(minorUnits, usd);
 
           expect(
-              money.allocationAccordingTo(ratios),
-              equals(
-                  result.map((minorUnits) => Money.fromInt(minorUnits, usd))));
+            money.allocationAccordingTo(ratios),
+            equals(result.map((minorUnits) => Money.fromInt(minorUnits, usd))),
+          );
         }
 
         // Allocation of zero amount:
@@ -332,10 +339,13 @@ void main() {
           final money = Money.fromInt(minorUnits, usd);
 
           expect(
-              money.allocationTo(targets),
-              equals(result
+            money.allocationTo(targets),
+            equals(
+              result
                   .map((minorUnits) => Money.fromInt(minorUnits, usd))
-                  .toList()));
+                  .toList(),
+            ),
+          );
         }
 
         // Allocation of zero amount:

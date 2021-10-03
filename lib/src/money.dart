@@ -138,8 +138,11 @@ class Money implements Comparable<Money> {
   /// Throws an MoneyParseException if the [monetaryAmount] doesn't
   /// match the pattern.
   ///
-  factory Money.parse(String monetaryAmount, Currency currency,
-      {String? pattern}) {
+  factory Money.parse(
+    String monetaryAmount,
+    Currency currency, {
+    String? pattern,
+  }) {
     pattern ??= currency.pattern;
 
     final decoder = PatternDecoder(currency, pattern);
@@ -151,8 +154,11 @@ class Money implements Comparable<Money> {
 
   ///
   @Deprecated("use Money.parse")
-  factory Money.fromString(String monetaryAmount, Currency currency,
-          {String? pattern}) =>
+  factory Money.fromString(
+    String monetaryAmount,
+    Currency currency, {
+    String? pattern,
+  }) =>
       Money.parse(monetaryAmount, currency, pattern: pattern);
 
   ///
@@ -329,7 +335,9 @@ class Money implements Comparable<Money> {
   /// otherwise.
   bool operator <(Money other) {
     _preconditionThatCurrencyTheSameFor(
-        other, () => 'Cannot compare money in different currencies.');
+      other,
+      () => 'Cannot compare money in different currencies.',
+    );
 
     return _minorUnits < other._minorUnits;
   }
@@ -340,7 +348,9 @@ class Money implements Comparable<Money> {
   /// otherwise.
   bool operator <=(Money other) {
     _preconditionThatCurrencyTheSameFor(
-        other, () => 'Cannot compare money in different currencies.');
+      other,
+      () => 'Cannot compare money in different currencies.',
+    );
 
     return _minorUnits <= other._minorUnits;
   }
@@ -351,7 +361,9 @@ class Money implements Comparable<Money> {
   /// otherwise.
   bool operator >(Money other) {
     _preconditionThatCurrencyTheSameFor(
-        other, () => 'Cannot compare money in different currencies.');
+      other,
+      () => 'Cannot compare money in different currencies.',
+    );
 
     return _minorUnits > other._minorUnits;
   }
@@ -362,7 +374,9 @@ class Money implements Comparable<Money> {
   /// otherwise.
   bool operator >=(Money other) {
     _preconditionThatCurrencyTheSameFor(
-        other, () => 'Cannot compare money in different currencies.');
+      other,
+      () => 'Cannot compare money in different currencies.',
+    );
 
     return _minorUnits >= other._minorUnits;
   }
@@ -382,10 +396,11 @@ class Money implements Comparable<Money> {
   List<Money> allocationTo(int targets) {
     if (targets < 1) {
       throw ArgumentError.value(
-          targets,
-          'targets',
-          'Number of targets must not be less than one, '
-              'cannot allocate to nothing.');
+        targets,
+        'targets',
+        'Number of targets must not be less than one, '
+            'cannot allocate to nothing.',
+      );
     }
 
     return allocationAccordingTo(List<int>.filled(targets, 1));
@@ -437,8 +452,10 @@ class Money implements Comparable<Money> {
   /// Creates new instance with the same currency and given [amount].
   Money _withAmount(MinorUnits amount) => Money._from(amount, _currency);
 
-  void _preconditionThatCurrencyTheSameFor(Money other,
-      [String Function()? message]) {
+  void _preconditionThatCurrencyTheSameFor(
+    Money other, [
+    String Function()? message,
+  ]) {
     String defaultMessage() =>
         'Cannot operate with money values in different currencies.';
 
@@ -458,7 +475,11 @@ class MoneyParseException implements Exception {
 
   ///
   factory MoneyParseException.fromValue(
-      String pattern, int i, String monetaryValue, int monetaryIndex) {
+    String pattern,
+    int i,
+    String monetaryValue,
+    int monetaryIndex,
+  ) {
     final message = '''
 monetaryValue contained an unexpected character '${monetaryValue[monetaryIndex]}' at pos $monetaryIndex 
         when a match for pattern character ${pattern[i]} at pos $i was expected.''';

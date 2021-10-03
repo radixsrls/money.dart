@@ -46,21 +46,30 @@ class PatternDecoder implements MoneyDecoder<String> {
         case 'S':
           final symbol = valueQueue.takeN(currency.symbol.length);
           if (symbol != currency.symbol) {
-            throw MoneyParseException.fromValue(compressedPattern, i,
-                compressedMonetaryValue, valueQueue.index);
+            throw MoneyParseException.fromValue(
+              compressedPattern,
+              i,
+              compressedMonetaryValue,
+              valueQueue.index,
+            );
           }
 
           break;
         case 'C':
           if (codeIndex >= code.length) {
             throw MoneyParseException(
-                'The pattern has more currency code "C" characters '
-                '($codeIndex + 1) than the length of the passed currency.');
+              'The pattern has more currency code "C" characters '
+              '($codeIndex + 1) than the length of the passed currency.',
+            );
           }
           final char = valueQueue.takeOne();
           if (char != code[codeIndex]) {
-            throw MoneyParseException.fromValue(compressedPattern, i,
-                compressedMonetaryValue, valueQueue.index);
+            throw MoneyParseException.fromValue(
+              compressedPattern,
+              i,
+              compressedMonetaryValue,
+              valueQueue.index,
+            );
           }
           codeIndex++;
           break;
@@ -81,8 +90,12 @@ class PatternDecoder implements MoneyDecoder<String> {
         case '.':
           final char = valueQueue.takeOne();
           if (char != currency.decimalSeparator) {
-            throw MoneyParseException.fromValue(compressedPattern, i,
-                compressedMonetaryValue, valueQueue.index);
+            throw MoneyParseException.fromValue(
+              compressedPattern,
+              i,
+              compressedMonetaryValue,
+              valueQueue.index,
+            );
           }
           seenMajor = true;
           break;
@@ -90,7 +103,8 @@ class PatternDecoder implements MoneyDecoder<String> {
           break;
         default:
           throw MoneyParseException(
-              'Invalid character "${compressedPattern[i]}" found in pattern.');
+            'Invalid character "${compressedPattern[i]}" found in pattern.',
+          );
       }
     }
 
@@ -122,13 +136,15 @@ class PatternDecoder implements MoneyDecoder<String> {
 
     if (matches.isEmpty) {
       throw MoneyParseException(
-          'The pattern did not contain a valid pattern such as "0.00"');
+        'The pattern did not contain a valid pattern such as "0.00"',
+      );
     }
 
     if (matches.length != 1) {
       throw MoneyParseException(
-          'The pattern contained more than one numberic pattern.'
-          " Check you don't have spaces in the numeric parts of the pattern.");
+        'The pattern contained more than one numberic pattern.'
+        " Check you don't have spaces in the numeric parts of the pattern.",
+      );
     }
 
     final Match match = matches.first;
@@ -236,8 +252,9 @@ class ValueQueue {
 
     if (digits.isEmpty) {
       throw MoneyParseException(
-          'Character "${monetaryValue[index]}" at pos $index'
-          ' is not a digit when a digit was expected');
+        'Character "${monetaryValue[index]}" at pos $index'
+        ' is not a digit when a digit was expected',
+      );
     }
     return digits;
   }

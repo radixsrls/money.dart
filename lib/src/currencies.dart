@@ -145,8 +145,9 @@ class Currencies {
 
       if (codeLength < 2) {
         throw MoneyParseException(
-            'The Country Code length (e.g. CC) must be at '
-            'least 2 characters long');
+          'The Country Code length (e.g. CC) must be at '
+          'least 2 characters long',
+        );
       }
 
       final code = _extractCode(monetaryAmountWithCode, codeLength);
@@ -251,12 +252,14 @@ class Currencies {
     final matches = regEx.allMatches(monetaryValue);
     if (matches.isEmpty) {
       throw MoneyParseException(
-          'No currency code found in the pattern: $monetaryValue');
+        'No currency code found in the pattern: $monetaryValue',
+      );
     }
 
     if (matches.length > 1) {
       throw MoneyParseException(
-          'More than one currency code found in the pattern: $monetaryValue');
+        'More than one currency code found in the pattern: $monetaryValue',
+      );
     }
 
     return monetaryValue.substring(matches.first.start, matches.first.end);

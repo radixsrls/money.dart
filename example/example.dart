@@ -100,8 +100,13 @@ void main() {
   ///      and '.' for the thousands separator.
   ///      -> 1.000,00
   ///
-  final euro = Currency.create('EUR', 2,
-      symbol: '€', invertSeparators: true, pattern: '#.##0,00 S');
+  final euro = Currency.create(
+    'EUR',
+    2,
+    symbol: '€',
+    invertSeparators: true,
+    pattern: '#.##0,00 S',
+  );
 
   final bmwPrice = Money.fromInt(10025090, euro);
   print(bmwPrice.toString());

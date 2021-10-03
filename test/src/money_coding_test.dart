@@ -92,8 +92,10 @@ void main() {
     });
 
     test('decoding exception', () {
-      expect(() => Money.decoding('invalid data', _FailingDecoder()),
-          throwsFormatException);
+      expect(
+        () => Money.decoding('invalid data', _FailingDecoder()),
+        throwsFormatException,
+      );
     });
   });
 }
